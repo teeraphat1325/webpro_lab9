@@ -1,4 +1,5 @@
-import { Entity, PrimaryGeneratedColumn, Column } from "typeorm"
+import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, ManyToOne } from "typeorm"
+import { Type } from "./Type";
 
 @Entity()
 export class Product {
@@ -11,5 +12,15 @@ export class Product {
 
     @Column()
     price: number;
+
+    @CreateDateColumn()
+    created: Date;
+
+    @UpdateDateColumn()
+    updated: Date;
+
+    @ManyToOne(() => Type, (type) => type.products)
+    type: Type;
+
 
 }

@@ -3,6 +3,8 @@ import { Role } from "./entity/Role";
 import { User } from "./entity/User"
 
 AppDataSource.initialize().then(async () => {
+    const userRepository = AppDataSource.getRepository(User);
+    await userRepository.clear()
     const roleRepository = AppDataSource.getRepository(Role);
     await roleRepository.clear();
     var role = new Role();
@@ -17,4 +19,7 @@ AppDataSource.initialize().then(async () => {
 
     const roles = await roleRepository.find({ order: { id: "asc" } });
     console.log(roles);
+
+    const adminRole = await roleRepository.findOne({ where: { id: 1 } });
+    console.log(adminRole);
 }).catch(error => console.log(error))

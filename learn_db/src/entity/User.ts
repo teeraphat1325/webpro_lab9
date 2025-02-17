@@ -1,4 +1,5 @@
-import { Entity, PrimaryGeneratedColumn, Column } from "typeorm"
+import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, ManyToMany, JoinTable } from "typeorm"
+import { Role } from "./Role";
 
 @Entity()
 export class User {
@@ -15,4 +16,13 @@ export class User {
     @Column()
     gender: string;
 
+    @CreateDateColumn()
+    created: Date;
+
+    @UpdateDateColumn()
+    updated: Date;
+
+    @ManyToMany(() => Role, (role) => role.users, { cascade: true })
+    @JoinTable()
+    roles: Role[];
 }

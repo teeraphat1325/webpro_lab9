@@ -20,6 +20,4 @@ AppDataSource.initialize().then(async () => {
     const roles = await roleRepository.find({ order: { id: "asc" } });
     console.log(roles);
 
-    const adminRole = await roleRepository.findOne({ where: { id: 1 } });
-    console.log(adminRole);
 }).catch(error => console.log(error))

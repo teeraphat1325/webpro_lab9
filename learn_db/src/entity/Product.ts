@@ -1,5 +1,6 @@
-import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, ManyToOne } from "typeorm"
+import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, ManyToOne, OneToMany } from "typeorm"
 import { Type } from "./Type";
+import { OrderItem } from "./OrderItem";
 
 @Entity()
 export class Product {
@@ -22,5 +23,8 @@ export class Product {
     @ManyToOne(() => Type, (type) => type.products)
     type: Type;
 
+
+    @OneToMany(() => OrderItem, (orderItem) => orderItem.product)
+    orderItems: OrderItem[];
 
 }
